@@ -9,8 +9,15 @@ struct element
 	element* next;
 };
 
-struct container
+class container
 {
-	element* data;
+	element *data;
 	int lenght = 0;
+public:
+	void Init();
+	void Input(ifstream& ifst);
+	void Output(ofstream& ofst);
+	void Clear();
+	container() { Init(); }
+	~container() { Clear(); };
 };

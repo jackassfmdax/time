@@ -4,47 +4,44 @@
 
 using namespace std;
 
-arrays* ReadArray(ifstream& ifst);
-void WriteArray(arrays &write_ar, ofstream &ofst);
-//инициализация  контейнера
-void Init(container& c)
+void container::Init()
 {
-	c.data = NULL;
+	data = NULL;
 }
-//ввод матриц в контейнер из указанного потока
-void Input(container& c, ifstream& ifst)
+
+void container::Input(ifstream& ifst)
 {
 	while (!ifst.eof())
 	{
-		element* temp = new element;
-		temp->ar = ReadArray(ifst);
-		temp->next = c.data;
-		c.data = temp;
-		c.lenght++;
+		element *temp = new element;
+		temp->ar = arrays::ReadArray(ifst);
+		temp->next = data;
+		data = temp;
+		lenght++;
 	}
 }
-//вывод содержимого контейнера в заданный выходной поток
-void Output(container& c, ofstream &ofst)
+
+void container::Output(ofstream &ofst)
 {
-	ofst << "Container content " << c.lenght << " elements." << endl;
-	element* temp = c.data;
-	int num = c.lenght;
+	ofst << "Container content " << lenght << " elements." << endl;
+	element *temp = data;
+	int num = lenght;
 	while (temp != NULL)
 	{
 		ofst << num << ": ";
-		WriteArray(*(temp->ar), ofst);
+		temp->ar->arrays::WriteArray((temp->ar), ofst);
 		temp = temp->next;
 		num--;
 	}
 }
-//удаление матриц, установка контейнера в начальное состояние
-void Clear(container& c)
+
+void container::Clear()
 {
-	while (c.data != 0)
+	while (data != NULL)
 	{
-		element* temp = c.data->next;
-		delete c.data;
-		c.data = temp;
+		element *temp = data->next;
+		delete data;
+		data = temp;
 	}
-	c.lenght = 0;
+	lenght = 0;
 }

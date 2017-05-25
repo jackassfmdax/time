@@ -3,82 +3,85 @@
 #include "array.h"
 
 using namespace std;
-//ввод параметров диагональной матрицы из файла
-void ReadDiagonal(diagonal_ar &d_ar, ifstream &ifst)
+
+void diagonal_ar::Read(ifstream &ifst)
 {
-	ifst >> d_ar.count;
-	d_ar.ar_d = new int[d_ar.count];
-	for (int i = 0; i < d_ar.count; i++)
-		ifst >> d_ar.ar_d[i];
+	int w;//
+	ifst >> w;
+	w--;
+	this->w = (diagonal_ar::way)w;
+	ifst >> count;//
+	ar_d = new int[count];
+	for (int i = 0; i < count; i++)
+		ifst >> ar_d[i];
 }
-//вывод параметров диагональной матрицы в поток
-void WriteDiagonal(diagonal_ar &d_ar, ofstream &ofst)
+
+void diagonal_ar::Write(ofstream &ofst)
 {
-	ofst << "It is Diagonal Matrix: count of elements = " << d_ar.count << endl << "Matrix:" << endl;
-	for (int i = 0; i < d_ar.count; i++)
+	string way[3] = { "Line", "Column", "Vector" };//
+	ofst << way[w].c_str() << endl;//
+	ofst << "It is Diagonal Matrix: count of elements = " << count << endl << "Matrix:" << endl;
+	for (int i = 0; i < count; i++)
 	{
-		for (int j = 0; j < d_ar.count; j++)
+		for (int j = 0; j < count; j++)
 			if (i == j)
-				ofst << d_ar.ar_d[i] << '\t';
+				ofst << ar_d[i] << '\t';
 			else
 				ofst << "0\t";
 		ofst << endl;
 	}
 }
-//ввод параметров обычной матрицы из файла
-void ReadUsual(usual_ar &us_ar, ifstream &ifst)
+
+void usual_ar::Read(ifstream &ifst)
 {
-	ifst >> us_ar.count;
-	us_ar.ar_us = new int*[us_ar.count];
-	for (int i = 0; i < us_ar.count; i++)
-		us_ar.ar_us[i] = new int[us_ar.count];
-	for (int i = 0; i < us_ar.count; i++)
-		for (int j = 0; j < us_ar.count; j++)
-			ifst >> us_ar.ar_us[i][j];
+	int w;//
+	ifst >> w;
+	w--;
+	this->w = (usual_ar::way)w;
+	ifst >> count//
+	ar_us = new int*[count];
+	for (int i = 0; i < count; i++)
+		ar_us[i] = new int[count];
+	for (int i = 0; i < count; i++)
+		for (int j = 0; j < count; j++)
+			ifst >> ar_us[i][j];
 }
-//вывод параметров обычной матрицы в поток
-void WriteUsual(usual_ar &us_ar, ofstream &ofst)
+
+void usual_ar::Write(ofstream &ofst)
 {
-	ofst << "It is Usual Matrix: count of elements = " << us_ar.count << endl << "Matrix:" << endl;
-	for (int i = 0; i < us_ar.count; i++)
+	string way[3] = { "Line", "Column", "Vector" };//
+	ofst << way[w].c_str() << endl;//
+	ofst << "It is Usual Matrix: count of elements = " << count << endl << "Matrix:" << endl;
+	for (int i = 0; i < count; i++)
 	{
-		for (int j = 0; j < us_ar.count; j++)
-			ofst << us_ar.ar_us[i][j] << '\t';
+		for (int j = 0; j < count; j++)
+			ofst << ar_us[i][j] << '\t';
 		ofst << endl;
 	}
 }
-//ввод параметров матрицы из файла
-arrays* ReadArray(ifstream& ifst)
+
+arrays* arrays::ReadArray(ifstream& ifst)
 {
-	arrays* ar = new arrays;
+	arrays* ar;
 	int key;
 	ifst >> key;
 	switch (key)
 	{
 	case 1:
-		ar->k = arrays::key::Diagonal;
-		ReadDiagonal(ar->d, ifst);
-		return ar;
+		ar = new diagonal_ar;
+		break;
 	case 2:
-		ar->k = arrays::key::Usual;
-		ReadUsual(ar->us, ifst);
-		return ar;
+		ar = new usual_ar;
+		break;
 	default:
 		return NULL;
 	}
+	ar->key = key;
+	ar->Read(ifst);
+	return ar;
 }
-//вывод параметров текущей матрицы в поток
-void WriteArray(arrays &write_ar, ofstream &ofst)
+
+void arrays::WriteArray(arrays *write_ar, ofstream &ofst)
 {
-	switch (write_ar.k)
-	{
-	case arrays::key::Diagonal:
-		WriteDiagonal(write_ar.d, ofst);
-		break;
-	case arrays::key::Usual:
-		WriteUsual(write_ar.us, ofst);
-		break;
-	default:
-		ofst << "Incorrect array!" << endl;
-	}
+	write_ar->Write(ofst);
 }
