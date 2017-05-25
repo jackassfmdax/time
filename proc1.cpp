@@ -9,11 +9,6 @@
 
 using namespace std;
 
-void Init(container& c);
-void Input(container& c, ifstream& ifst);
-void Output(container& c, ofstream& ofst);
-void Clear(container& c);
-
 int main(int argc, char* argv[])
 {
 	if (argc != 3) 
@@ -22,17 +17,16 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	ifstream in(argv[1]);
-	ofstream out(argv[2]);
+	ofstream out("out.txt");
 
 	cout << "Start" << endl;
 	container c;
-	Init(c);
-	Input(c, in);
+	c.Input(in);
 	out << "Filled contienr." << endl;
-	Output(c, out);
-	Clear(c);
+	c.Output(out);
+	c.Clear();
 	out << "Empty container." << endl;
-	Output(c, out);
+	c.Output(out);
 	cout << "Stop" << endl;
 	in.close();
 	out.close();

@@ -1,27 +1,46 @@
 #pragma once
 
+#include <fstream>
+
 using namespace std;
 
-struct usual_ar
+class arrays
 {
-	int count;
+public:
+	int count = 0;
+	int key = 0;
+public:
+	static arrays* ReadArray(ifstream& ifst); 
+	static void arrays::WriteArray(arrays *write_ar, ofstream &ofst);
+	virtual void Read(ifstream &ifst) = 0;
+	virtual void Write(ofstream &ofst) = 0;
+	arrays() {};
+};
+
+class usual_ar:public arrays
+{
 	int** ar_us;
+public:
+	void Read(ifstream &ifst);
+	void Write(ofstream &ofst);
+	usual_ar() {};
 };
 
-struct diagonal_ar
+class diagonal_ar : public arrays
 {
-	int count;
 	int* ar_d;
+public:
+	void Read(ifstream &ifst);
+	void Write(ofstream &ofst);
+	diagonal_ar() {};
 };
 
-struct arrays
+class triangle_ar : public arrays
 {
-	enum key { Diagonal, Usual };
-	key k;
-	int count;
-	union
-	{
-		diagonal_ar d;
-		usual_ar us;
-	};
+public:
+	int** ar_tr;
+public:
+	void Read(ifstream &ifst);
+	void Write(ofstream &ofst);
+	triangle_ar() {};
 };
