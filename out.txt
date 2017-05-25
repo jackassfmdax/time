@@ -1,4 +1,5 @@
 Filled contienr.
+<<<<<<< HEAD
 Container content 4 elements.
 4: It is Triangle Matrix: count of elements = 5
 Matrix:
@@ -8,10 +9,19 @@ Matrix:
 7	8	9	10	0	
 11	12	13	14	15	
 3: It is Usual Matrix: count of elements = 3
+=======
+Containrt contents 5 elements.
+It is Usual Matrix: count of elements = 2
+Matrix:
+10	20	
+30	40	
+It is Usual Matrix: count of elements = 3
+>>>>>>> newsort
 Matrix:
 12	45	78	
 23	56	89	
 87	54	21	
+<<<<<<< HEAD
 2: It is Usual Matrix: count of elements = 2
 Matrix:
 4	9	
@@ -21,5 +31,13 @@ Matrix:
 7	0	0	
 0	5	0	
 0	0	3	
+=======
+
+It is Usual Matrix: count of elements = 2
+Matrix:
+4	9	
+7	12	
+
+>>>>>>> newsort
 Empty container.
-Container content 0 elements.
+Containrt contents 0 elements.

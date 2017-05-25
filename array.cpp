@@ -6,7 +6,11 @@ using namespace std;
 
 void diagonal_ar::Read(ifstream &ifst)
 {
+<<<<<<< HEAD
 	ifst >> count;
+=======
+	ifst >> count;//
+>>>>>>> newsort
 	ar_d = new int[count];
 	for (int i = 0; i < count; i++)
 		ifst >> ar_d[i];
@@ -14,7 +18,11 @@ void diagonal_ar::Read(ifstream &ifst)
 
 void diagonal_ar::Write(ofstream &ofst)
 {
+<<<<<<< HEAD
 	ofst << "It is Diagonal Matrix: count of elements = " << count << endl << "Matrix:" << endl;
+=======
+	ofst << "It is Diagonal Matrix:" << endl << "Matrix:" << endl;
+>>>>>>> newsort
 	for (int i = 0; i < count; i++)
 	{
 		for (int j = 0; j < count; j++)
@@ -38,6 +46,7 @@ void usual_ar::Read(ifstream &ifst)
 }
 
 void usual_ar::Write(ofstream &ofst)
+<<<<<<< HEAD
 {
 	ofst << "It is Usual Matrix: count of elements = " << count << endl << "Matrix:" << endl;
 	for (int i = 0; i < count; i++)
@@ -70,10 +79,29 @@ void triangle_ar::Write(ofstream &ofst)
 				ofst << ar_tr[i][j] << '\t';
 			else
 				ofst << "0\t";
+=======
+{
+	ofst << "It is Usual Matrix: count of elements = " << count << endl << "Matrix:" << endl;
+	for (int i = 0; i < count; i++)
+	{
+		for (int j = 0; j < count; j++)
+			ofst << ar_us[i][j] << '\t';
+>>>>>>> newsort
 		ofst << endl;
 	}
 }
 
+<<<<<<< HEAD
+=======
+void arrays::Outusual(ofstream &ofst) {//////
+	ofst << endl;  // пустая строка
+}
+
+void usual_ar::Outusual(ofstream &ofst) {/////
+	Write(ofst);
+}
+
+>>>>>>> newsort
 
 arrays* arrays::ReadArray(ifstream& ifst)
 {
@@ -88,9 +116,12 @@ arrays* arrays::ReadArray(ifstream& ifst)
 	case 2:
 		ar = new usual_ar;
 		break;
+<<<<<<< HEAD
 	case 3:
 		ar = new triangle_ar;
 		break;
+=======
+>>>>>>> newsort
 	default:
 		return NULL;
 	}

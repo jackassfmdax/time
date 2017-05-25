@@ -23,15 +23,24 @@ void container::Input(ifstream& ifst)
 
 void container::Output(ofstream &ofst)
 {
+<<<<<<< HEAD
 	ofst << "Container content " << lenght << " elements." << endl;
+=======
+	ofst << "Containrt contents " << lenght << " elements." << endl;
+>>>>>>> newsort
 	element *temp = data;
 	int num = lenght;
 	while (temp != NULL)
 	{
+<<<<<<< HEAD
 		ofst << num << ": ";
 		temp->ar->arrays::WriteArray((temp->ar), ofst);
 		temp = temp->next;
 		num--;
+=======
+			temp->ar->Outusual(ofst);
+			temp = temp->next;
+>>>>>>> newsort
 	}
 }
 
